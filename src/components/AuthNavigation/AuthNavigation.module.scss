@@ -1,0 +1,41 @@
+.authNavContainer {
+  display: flex;
+}
+
+.registerLink,
+.loginLink {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 13px;
+  text-align: right;
+  letter-spacing: 0.04em;
+  color: #e2b076;
+  text-decoration: none;
+  transition: 0.3s;
+
+  &:hover,
+  &:focus {
+    color: #fc842d;
+  }
+}
+
+.loginLink {
+  position: relative;
+  padding-right: 22px;
+
+  &::before {
+    content: '';
+    display: block;
+    height: 130%;
+    width: 2px;
+    position: absolute;
+    right: 0;
+    top: -10%;
+    background-color: #c6c6c6;
+  }
+}
+
+.registerLink {
+  padding-left: 22px;
+}

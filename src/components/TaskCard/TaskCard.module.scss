@@ -1,0 +1,71 @@
+.singleTaskContainer {
+  position: relative;
+  padding: 10px;
+  padding-right: 30px;
+  border: 1px solid #e2b076;
+  border-radius: 4px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.singleTaskText {
+  margin: 0;
+  padding-bottom: 10px;
+  overflow: hidden;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  color: #e2b076;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.buttonClose {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.footerCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.time {
+  font-size: 10px;
+  color: rgb(96, 94, 94);
+}
+
+.singleTaskContainer:hover .buttonClose,
+.singleTaskContainer:focus .buttonClose {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.completed {
+  font-size: 14px;
+  font-weight: 500;
+  color: #12c512;
+}
+
+.pending {
+  font-size: 14px;
+  font-weight: 500;
+  color: #c7c7c7;
+}

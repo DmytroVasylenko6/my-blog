@@ -1,0 +1,15 @@
+.homePage {
+  padding-top: 50px;
+}
+
+.imageContainer {
+  width: 300px;
+  margin: 0 auto;
+
+  img {
+    display: block;
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+  }
+}
