@@ -21,9 +21,12 @@
   cursor: pointer;
   margin-right: 20px;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: #fb2c1e;
+  }
+
+  &:active {
+    background-color: #c61509;
   }
 }
 
@@ -34,9 +37,14 @@
   border-radius: 4px;
   background-color: #e7984f;
   color: #ffffff;
+  transition: 0.3s;
+  cursor: pointer;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: #f89538;
+  }
+
+  &:active {
+    background-color: #d56e0e;
   }
 }

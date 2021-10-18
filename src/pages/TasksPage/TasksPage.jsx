@@ -12,6 +12,7 @@ import TaskCard from '../../components/TaskCard';
 
 const TodosPage = () => {
   const tasksList = useSelector(getTasks);
+  const reverseTasksList = [...tasksList].reverse();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -39,18 +40,20 @@ const TodosPage = () => {
               direction="row"
               justifyContent="flex-start"
               alignItems="flex-start">
-              {tasksList.map(({ _id, description, createdAt, completed }) => {
-                return (
-                  <Grid item xs={4} key={_id}>
-                    <TaskCard
-                      id={_id}
-                      description={description}
-                      createdAt={createdAt}
-                      completed={completed}
-                    />
-                  </Grid>
-                );
-              })}
+              {reverseTasksList.map(
+                ({ _id, description, createdAt, completed }) => {
+                  return (
+                    <Grid item xs={4} key={_id}>
+                      <TaskCard
+                        id={_id}
+                        description={description}
+                        createdAt={createdAt}
+                        completed={completed}
+                      />
+                    </Grid>
+                  );
+                },
+              )}
             </Grid>
           </Grid>
         </Grid>

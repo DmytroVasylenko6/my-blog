@@ -13,7 +13,7 @@ export default function CustomizedSnackbars() {
   const dispatch = useDispatch();
   const notification = useSelector(getNotifInfo);
 
-  console.log(notification);
+  // console.log(notification);
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;

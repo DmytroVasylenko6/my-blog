@@ -19,16 +19,16 @@ export default function FormAddTask() {
       </Typography>
       <Formik
         initialValues={{
-          text: '',
+          description: '',
         }}
-        //   validationSchema={loginSchema}
-        onSubmit={values => {
-          // onLogin(values);
+        onSubmit={(values, { resetForm }) => {
           onAddTask(values);
+          resetForm({});
         }}>
         {({ values, errors, touched, handleChange, handleBlur }) => (
           <Form className={s.formAddTask}>
             <TextField
+              value={values.description}
               variant="outlined"
               margin="normal"
               required

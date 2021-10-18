@@ -13,7 +13,7 @@ export default function TaskCard({ id, description, createdAt, completed }) {
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
-  console.log(convertDate(createdAt));
+  // console.log(convertDate(createdAt));
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ export default function TaskCard({ id, description, createdAt, completed }) {
           <time className={s.time} dateTime={createdAt}>
             {convertDate(createdAt)}
           </time>
-          {!completed ? (
+          {completed ? (
             <span className={s.completed}>Completed</span>
           ) : (
             <span className={s.pending}>Pending</span>
