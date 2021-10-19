@@ -17,7 +17,7 @@ import tasksReducer from './tasks/tasks-reducer';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token', 'isAuthenticated'],
+  whitelist: ['user', 'token', 'isAuthenticated'],
 };
 
 export const store = configureStore({

@@ -14,3 +14,12 @@
     height: auto;
   }
 }
+.link {
+  color: #fc842d;
+  transition: 0.2s;
+
+  &:hover,
+  &:focus {
+    color: #f76700;
+  }
+}

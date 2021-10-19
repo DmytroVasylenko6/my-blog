@@ -23,6 +23,9 @@ const RegisterPage = lazy(() =>
 const LoginPage = lazy(() =>
   import('./pages/LoginPage' /* webpackChunkName: "login-page" */),
 );
+const AccountPage = lazy(() =>
+  import('./pages/AccountPage' /* webpackChunkName: "account-page" */),
+);
 
 const App = () => {
   const dispatch = useDispatch();
@@ -58,6 +61,14 @@ const App = () => {
               restricted
               redirectTo={paths.login}>
               <SingleTaskPage />
+            </PrivateRoute>
+
+            <PrivateRoute
+              exact
+              path={paths.account}
+              restricted
+              redirectTo={paths.login}>
+              <AccountPage />
             </PrivateRoute>
 
             <PublicRoute

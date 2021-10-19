@@ -18,7 +18,7 @@ const register = credentials => async dispatch => {
 
   try {
     const response = await axios.post('/user/register', credentials);
-    console.log(response);
+
     token.set(response.data.token);
     dispatch(authActions.registerSuccess(response.data));
     dispatch(
@@ -94,6 +94,55 @@ const logOut = () => async dispatch => {
   }
 };
 
+const updateUser = user => async (dispatch, getState) => {
+  dispatch(authActions.updateUserRequest());
+  try {
+    const response = await axios.put('/user/me', user);
+    dispatch(authActions.updateUserSuccess(response.data));
+    dispatch(
+      notifInfo({
+        message: 'Successful update!',
+        status: true,
+        severity: 'success',
+      }),
+    );
+  } catch (error) {
+    dispatch(authActions.updateUserError(error.message));
+    dispatch(
+      notifInfo({
+        message: error.message,
+        status: true,
+        severity: 'error',
+      }),
+    );
+  }
+};
+
+const deleteUser = () => async (dispatch, getState) => {
+  dispatch(authActions.deleteUserRequest());
+  try {
+    await axios.delete('/user/me');
+    token.unset();
+    dispatch(authActions.deleteUserSuccess());
+    dispatch(
+      notifInfo({
+        message: 'Successful delete user!',
+        status: true,
+        severity: 'success',
+      }),
+    );
+  } catch (error) {
+    dispatch(authActions.deleteUserError(error.message));
+    dispatch(
+      notifInfo({
+        message: error.message,
+        status: true,
+        severity: 'error',
+      }),
+    );
+  }
+};
+
 const getCurrentUser = () => async (dispatch, getState) => {
   const {
     auth: { token: persistedToken },
@@ -115,6 +164,74 @@ const getCurrentUser = () => async (dispatch, getState) => {
   }
 };
 
-const authOperations = { token, register, logIn, logOut, getCurrentUser };
+const uploadAvatar = (credentials, userId) => async (dispatch, getState) => {
+  let formData = new FormData();
+  formData.append('avatar', credentials);
+
+  dispatch(authActions.uploadAvatarRequest());
+
+  try {
+    await axios.post('/user/me/avatar', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    const response = await axios.get(`/user/${userId}/avatar`, {
+      responseType: 'arraybuffer',
+    });
+    let blob = new Blob([response.data], {
+      type: response.headers['content-type'],
+    });
+    let avatar = URL.createObjectURL(blob);
+
+    dispatch(authActions.uploadAvatarSuccess(avatar));
+    dispatch(
+      notifInfo({
+        message: 'Successful upload avatar!',
+        status: true,
+        severity: 'success',
+      }),
+    );
+  } catch (error) {
+    dispatch(authActions.uploadAvatarError(error?.message));
+    dispatch(
+      notifInfo({
+        message: error.message,
+        status: true,
+        severity: 'error',
+      }),
+    );
+  }
+};
+
+const getAvatar = userId => async (dispatch, getState) => {
+  dispatch(authActions.getAvatarRequest());
+  try {
+    const response = await axios.get(`/user/${userId}/avatar`, {
+      responseType: 'arraybuffer',
+    });
+    let blob = new Blob([response.data], {
+      type: response.headers['content-type'],
+    });
+    let avatar = URL.createObjectURL(blob);
+
+    dispatch(authActions.getAvatarSuccess(avatar));
+  } catch (error) {
+    dispatch(authActions.getAvatarError(error?.message));
+  }
+};
+
+const authOperations = {
+  token,
+  register,
+  logIn,
+  logOut,
+  updateUser,
+  deleteUser,
+  getCurrentUser,
+  uploadAvatar,
+  getAvatar,
+};
 
 export default authOperations;

@@ -1,16 +1,19 @@
 const getIsAuthenticated = state => state.auth.isAuthenticated;
 
-const getUserName = state => state.auth.user.name;
+const getUser = state => state.auth.user;
 
 const getErrorMessage = state => state.auth.error;
 
 const getErrorStatus = state => state.auth.errorStatus;
 
+const getAvatar = state => state.auth.avatar;
+
 const authSelectors = {
   getIsAuthenticated,
-  getUserName,
+  getUser,
   getErrorMessage,
   getErrorStatus,
+  getAvatar,
 };
 
 export default authSelectors;

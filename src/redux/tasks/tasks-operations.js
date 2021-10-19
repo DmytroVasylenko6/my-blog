@@ -7,7 +7,6 @@ const taskParse = task => async dispatch => {
 
   try {
     const tasks = await todosAPI.getAllTasks();
-    // console.log(tasks);
     dispatch(taskActions.parseTaskSuccess(tasks.data.data));
   } catch (error) {
     dispatch(taskActions.parseTaskError(error));
@@ -44,7 +43,6 @@ const taskDelete = id => async dispatch => {
 
   try {
     const response = await todosAPI.deleteTask(id);
-    // console.log(response);
     dispatch(taskActions.deleteTaskSuccess(id));
     dispatch(
       notifInfo({
