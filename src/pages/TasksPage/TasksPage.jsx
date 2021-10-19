@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, createRef } from 'react';
 import Container from '../../components/common/Container';
 import { Typography } from '@mui/material';
 import s from './TasksPage.module.scss';
@@ -9,6 +9,7 @@ import getTasks from '../../redux/tasks/tasks-selectors';
 import { useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 import TaskCard from '../../components/TaskCard';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const TodosPage = () => {
   const tasksList = useSelector(getTasks);
@@ -40,20 +41,31 @@ const TodosPage = () => {
               direction="row"
               justifyContent="flex-start"
               alignItems="flex-start">
-              {reverseTasksList.map(
-                ({ _id, description, createdAt, completed }) => {
-                  return (
-                    <Grid item xs={4} key={_id}>
-                      <TaskCard
-                        id={_id}
-                        description={description}
-                        createdAt={createdAt}
-                        completed={completed}
-                      />
-                    </Grid>
-                  );
-                },
-              )}
+              <TransitionGroup component={null} className={s.list}>
+                {reverseTasksList.map(
+                  ({ _id, description, createdAt, completed }) => {
+                    const item = createRef(null);
+                    return (
+                      <CSSTransition
+                        key={_id}
+                        timeout={500}
+                        classNames="task-scale"
+                        appear={true}
+                        nodeRef={item}
+                        unmountOnExit>
+                        <Grid ref={item} item xs={4} key={_id}>
+                          <TaskCard
+                            id={_id}
+                            description={description}
+                            createdAt={createdAt}
+                            completed={completed}
+                          />
+                        </Grid>
+                      </CSSTransition>
+                    );
+                  },
+                )}
+              </TransitionGroup>
             </Grid>
           </Grid>
         </Grid>

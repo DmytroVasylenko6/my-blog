@@ -13,13 +13,14 @@ export default function TaskCard({ id, description, createdAt, completed }) {
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
-  // console.log(convertDate(createdAt));
-
   const location = useLocation();
   const dispatch = useDispatch();
 
   const onDeleteTask = useCallback(
-    id => dispatch(taskOperations.taskDelete(id)),
+    id => {
+      dispatch(taskOperations.taskDelete(id));
+      handleCloseModal();
+    },
     [dispatch],
   );
 

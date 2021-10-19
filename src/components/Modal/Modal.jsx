@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { styled, Box } from '@mui/system';
 import ModalUnstyled from '@mui/core/ModalUnstyled';
+import Zoom from '@mui/material/Zoom';
 import s from './Modal.module.scss';
 
 const StyledModal = styled(ModalUnstyled)`
@@ -38,10 +39,6 @@ const style = {
 };
 
 export default function ModalUnstyledDemo({ open, handleClose, onDelete }) {
-  //   const [open, setOpen] = React.useState(false);
-  //   const handleOpen = () => setOpen(true);
-  //   const handleClose = () => setOpen(false);
-
   return (
     <div>
       <StyledModal
@@ -49,19 +46,21 @@ export default function ModalUnstyledDemo({ open, handleClose, onDelete }) {
         open={open}
         onClose={handleClose}
         BackdropComponent={Backdrop}>
-        <Box sx={style}>
-          <h2 className={s.titleModal} id="unstyled-modal-title">
-            Are you sure you want to delete this task?
-          </h2>
-          <div className={s.buttonContainer}>
-            <button className={s.buttonYes} onClick={onDelete}>
-              Yes
-            </button>
-            <button className={s.buttonNo} onClick={handleClose}>
-              No
-            </button>
-          </div>
-        </Box>
+        <Zoom in={open}>
+          <Box sx={style}>
+            <h2 className={s.titleModal} id="unstyled-modal-title">
+              Are you sure you want to delete this task?
+            </h2>
+            <div className={s.buttonContainer}>
+              <button className={s.buttonYes} onClick={onDelete}>
+                Yes
+              </button>
+              <button className={s.buttonNo} onClick={handleClose}>
+                No
+              </button>
+            </div>
+          </Box>
+        </Zoom>
       </StyledModal>
     </div>
   );
