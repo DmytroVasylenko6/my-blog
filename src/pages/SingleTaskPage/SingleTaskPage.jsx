@@ -103,13 +103,13 @@ function SingleTaskPage() {
                 {todo?.completed ? (
                   <span className={s.completed}>Completed</span>
                 ) : (
-                  <span className={s.pending}>Pending</span>
+                  <span className={s.pending}>Incompleted</span>
                 )}
               </div>
             </div>
             <div className={s.buttonContainer}>
               <button onClick={onClickUpdateTask} className={s.updateBtn}>
-                {!todo?.completed ? 'Check completed' : 'Check pending'}
+                {!todo?.completed ? 'Check completed' : 'Check incompleted'}
               </button>
               <button onClick={handleOpenModal} className={s.deleteBtn}>
                 Delete

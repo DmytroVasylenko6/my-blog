@@ -1,5 +1,5 @@
-import React, { Suspense, lazy, useEffect } from 'react';
-import { Switch, Redirect } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect, useRef } from 'react';
+import { Switch, Redirect, useLocation } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import paths from './utils/routes';
@@ -7,6 +7,7 @@ import authOperations from './redux/auth/auth-operation';
 import { useDispatch } from 'react-redux';
 import Header from './components/Header';
 import Notification from './components/Notification';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const HomePage = lazy(() =>
   import('./pages/HomePage' /* webpackChunkName: "home-page" */),
@@ -28,6 +29,8 @@ const AccountPage = lazy(() =>
 );
 
 const App = () => {
+  const nodeRef = useRef(null);
+  let location = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(authOperations.getCurrentUser());
@@ -36,56 +39,71 @@ const App = () => {
   return (
     <>
       <Header />
-      <main>
-        <Suspense fallback={<></>}>
-          <Switch>
-            <PrivateRoute
-              exact
-              path={paths.home}
-              restricted
-              redirectTo={paths.login}>
-              <HomePage />
-            </PrivateRoute>
 
-            <PrivateRoute
-              exact
-              path={paths.todos}
-              restricted
-              redirectTo={paths.login}>
-              <TasksPage />
-            </PrivateRoute>
+      <TransitionGroup component="main">
+        <CSSTransition
+          nodeRef={nodeRef}
+          key={location.key}
+          classNames="fade"
+          timeout={500}
+          appear={true}
+          unmountOnExit>
+          <div ref={nodeRef}>
+            <Suspense fallback={<></>}>
+              <Switch location={location}>
+                <PrivateRoute
+                  exact
+                  path={paths.home}
+                  // restricted
+                  redirectTo={paths.login}>
+                  <HomePage />
+                </PrivateRoute>
 
-            <PrivateRoute
-              exact
-              path={paths.singleTodos}
-              restricted
-              redirectTo={paths.login}>
-              <SingleTaskPage />
-            </PrivateRoute>
+                <PrivateRoute
+                  exact
+                  path={paths.todos}
+                  restricted
+                  redirectTo={paths.login}>
+                  <TasksPage />
+                </PrivateRoute>
 
-            <PrivateRoute
-              exact
-              path={paths.account}
-              restricted
-              redirectTo={paths.login}>
-              <AccountPage />
-            </PrivateRoute>
+                <PrivateRoute
+                  exact
+                  path={paths.singleTodos}
+                  // restricted
+                  redirectTo={paths.login}>
+                  <SingleTaskPage />
+                </PrivateRoute>
 
-            <PublicRoute
-              path={paths.register}
-              restricted
-              redirectTo={paths.home}>
-              <RegisterPage />
-            </PublicRoute>
+                <PrivateRoute
+                  exact
+                  path={paths.account}
+                  // restricted
+                  redirectTo={paths.login}>
+                  <AccountPage />
+                </PrivateRoute>
 
-            <PublicRoute path={paths.login} restricted redirectTo={paths.home}>
-              <LoginPage />
-            </PublicRoute>
+                <PublicRoute
+                  path={paths.register}
+                  restricted
+                  redirectTo={paths.home}>
+                  <RegisterPage />
+                </PublicRoute>
 
-            <Redirect to="/" />
-          </Switch>
-        </Suspense>
-      </main>
+                <PublicRoute
+                  path={paths.login}
+                  restricted
+                  redirectTo={paths.home}>
+                  <LoginPage />
+                </PublicRoute>
+
+                <Redirect to="/" />
+              </Switch>
+            </Suspense>
+          </div>
+        </CSSTransition>
+      </TransitionGroup>
+
       <Notification />
     </>
   );

@@ -33,6 +33,11 @@ const isAuthenticated = createReducer(false, {
 const avatar = createReducer(null, {
   [authActions.getAvatarSuccess]: (_, { payload }) => payload,
   [authActions.uploadAvatarSuccess]: (_, { payload }) => payload,
+  [authActions.logoutSuccess]: () => null,
+  [authActions.deleteUserSuccess]: () => null,
+  [authActions.registerError]: () => null,
+  [authActions.loginError]: () => null,
+  [authActions.getCurrentUserError]: () => null,
 });
 
 const authReducer = combineReducers({

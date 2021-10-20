@@ -45,7 +45,7 @@ export default function TaskCard({ id, description, createdAt, completed }) {
           {completed ? (
             <span className={s.completed}>Completed</span>
           ) : (
-            <span className={s.pending}>Pending</span>
+            <span className={s.pending}>Incompleted</span>
           )}
         </div>
       </div>

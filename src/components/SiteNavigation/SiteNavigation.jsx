@@ -16,12 +16,20 @@ export default function SiteNavigation() {
             Home
           </NavLink>
         </li>
-        <li className={s.NavLink}>
+        <li className={s.navItem}>
           <NavLink
             to={routes.todos}
             activeClassName={s.activeNavLink}
             className={s.navLink}>
             Tasks
+          </NavLink>
+        </li>
+        <li className={s.navItem}>
+          <NavLink
+            to={routes.account}
+            activeClassName={s.activeNavLink}
+            className={s.navLink}>
+            Account
           </NavLink>
         </li>
       </ul>

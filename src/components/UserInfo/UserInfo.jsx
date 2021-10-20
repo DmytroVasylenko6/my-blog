@@ -20,11 +20,14 @@ export default function UserInfo() {
   return (
     <div className={s.useInfoContainer}>
       <Link className={s.link} to={routes.account}>
-        <img
-          className={s.avatar}
-          src={avatar ? avatar : defaultAvatar}
-          alt="mini-avatar"
-        />
+        {defaultAvatar && (
+          <img
+            className={s.avatar}
+            src={avatar ? avatar : defaultAvatar}
+            alt="mini-avatar"
+          />
+        )}
+
         <span className={s.nickName}>{user.name}</span>
       </Link>
       <button onClick={() => onLogout()} className={s.logOutButton}>

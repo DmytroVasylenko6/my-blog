@@ -1,5 +1,13 @@
 @import '../node_modules/modern-normalize/modern-normalize.css';
 
+// scrollbar for mozilla
+html {
+  margin-right: calc(-1 * (100vw - 100%));
+  scrollbar-width: thin;
+  scrollbar-color: #c8a27e #ffeddc;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -8,6 +16,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #202020;
+}
+
+// scrollbar for chrome
+body::-webkit-scrollbar {
+  width: 5px;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #c8a27e;
+  outline: 1px solid #c8a27e;
 }
 
 code {
@@ -60,29 +82,15 @@ input:-webkit-autofill:active {
   z-index: 1;
 }
 
-.fade-enter.fade-enter-active {
+.fade-enter-active {
   opacity: 1;
   transition: opacity 250ms ease-in;
 }
 
-.page-enter {
+.fade-exit {
   opacity: 0;
-  transform: scale(1.1);
 }
 
-.page-enter-active {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 300ms, transform 300ms;
-}
-
-.page-exit {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.page-exit-active {
+.fade-exit-active {
   opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 300ms, transform 300ms;
 }
