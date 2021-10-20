@@ -1,9 +1,26 @@
 .header {
+  position: relative;
   display: block;
-  padding: 15px 0;
   width: 100%;
+  z-index: 999;
+}
+
+.container {
+  position: relative;
+  z-index: 999;
+  max-width: 1080px;
+  width: 100%;
+  padding: 15px 30px;
+  margin: 0 auto;
   background-color: #171717;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.73);
+}
+
+.logo {
+  @media screen and (max-width: 900px) {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .contentContainer {

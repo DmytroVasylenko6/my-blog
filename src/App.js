@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useRef } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { Switch, Redirect, useLocation } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
@@ -29,7 +29,6 @@ const AccountPage = lazy(() =>
 );
 
 const App = () => {
-  const nodeRef = useRef(null);
   let location = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -42,65 +41,71 @@ const App = () => {
 
       <TransitionGroup component="main">
         <CSSTransition
-          nodeRef={nodeRef}
           key={location.key}
           classNames="fade"
           timeout={500}
           appear={true}
           unmountOnExit>
-          <div ref={nodeRef}>
-            <Suspense fallback={<></>}>
-              <Switch location={location}>
-                <PrivateRoute
-                  exact
-                  path={paths.home}
-                  // restricted
-                  redirectTo={paths.login}>
-                  <HomePage />
-                </PrivateRoute>
+          <Suspense
+            fallback={
+              <div
+                style={{
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  background: '#000000',
+                }}></div>
+            }>
+            <Switch location={location}>
+              <PrivateRoute
+                exact
+                path={paths.home}
+                // restricted
+                redirectTo={paths.login}>
+                <HomePage />
+              </PrivateRoute>
 
-                <PrivateRoute
-                  exact
-                  path={paths.todos}
-                  restricted
-                  redirectTo={paths.login}>
-                  <TasksPage />
-                </PrivateRoute>
+              <PrivateRoute
+                exact
+                path={paths.todos}
+                restricted
+                redirectTo={paths.login}>
+                <TasksPage />
+              </PrivateRoute>
 
-                <PrivateRoute
-                  exact
-                  path={paths.singleTodos}
-                  // restricted
-                  redirectTo={paths.login}>
-                  <SingleTaskPage />
-                </PrivateRoute>
+              <PrivateRoute
+                exact
+                path={paths.singleTodos}
+                // restricted
+                redirectTo={paths.login}>
+                <SingleTaskPage />
+              </PrivateRoute>
 
-                <PrivateRoute
-                  exact
-                  path={paths.account}
-                  // restricted
-                  redirectTo={paths.login}>
-                  <AccountPage />
-                </PrivateRoute>
+              <PrivateRoute
+                exact
+                path={paths.account}
+                // restricted
+                redirectTo={paths.login}>
+                <AccountPage />
+              </PrivateRoute>
 
-                <PublicRoute
-                  path={paths.register}
-                  restricted
-                  redirectTo={paths.home}>
-                  <RegisterPage />
-                </PublicRoute>
+              <PublicRoute
+                path={paths.register}
+                restricted
+                redirectTo={paths.home}>
+                <RegisterPage />
+              </PublicRoute>
 
-                <PublicRoute
-                  path={paths.login}
-                  restricted
-                  redirectTo={paths.home}>
-                  <LoginPage />
-                </PublicRoute>
+              <PublicRoute
+                path={paths.login}
+                restricted
+                redirectTo={paths.home}>
+                <LoginPage />
+              </PublicRoute>
 
-                <Redirect to="/" />
-              </Switch>
-            </Suspense>
-          </div>
+              <Redirect to="/" />
+            </Switch>
+          </Suspense>
         </CSSTransition>
       </TransitionGroup>
 

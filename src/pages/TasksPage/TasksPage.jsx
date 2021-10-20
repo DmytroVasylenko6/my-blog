@@ -31,10 +31,10 @@ const TodosPage = () => {
           spacing={4}
           direction="row"
           justifyContent="space-between">
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <FormAddTask />
           </Grid>
-          <Grid item xs={9}>
+          <Grid item md={9}>
             <Grid
               container
               spacing={2}
@@ -53,7 +53,7 @@ const TodosPage = () => {
                         appear={true}
                         nodeRef={item}
                         unmountOnExit>
-                        <Grid ref={item} item xs={4} key={_id}>
+                        <Grid ref={item} item xs={12} sm={4} key={_id}>
                           <TaskCard
                             id={_id}
                             description={description}

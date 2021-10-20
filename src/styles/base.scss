@@ -32,6 +32,12 @@ body::-webkit-scrollbar-thumb {
   outline: 1px solid #c8a27e;
 }
 
+// for body
+.scroll-hidden {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -88,9 +94,15 @@ input:-webkit-autofill:active {
 }
 
 .fade-exit {
+  position: absolute;
+  z-index: -10;
   opacity: 0;
+  display: none;
 }
 
 .fade-exit-active {
+  position: absolute;
+  z-index: -10;
   opacity: 0;
+  display: none;
 }
