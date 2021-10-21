@@ -2,10 +2,16 @@ import React, { useRef, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import UserInfo from '../UserInfo';
 import SiteNavigation from '../SiteNavigation';
+import AuthNavigation from '../AuthNavigation';
 
 import s from './MobileMenu.module.scss';
 
-export default function MobileMenu({ isOpen, isWide, onClick }) {
+export default function MobileMenu({
+  isOpen,
+  isWide,
+  onClick,
+  isAuthenticated,
+}) {
   const nav = useRef(null);
   const body = document.querySelector('body');
 
@@ -35,7 +41,7 @@ export default function MobileMenu({ isOpen, isWide, onClick }) {
       classNames="burger-animation"
       unmountOnExit>
       <div ref={nav} className={s.mobileNav} id="header_nav">
-        <UserInfo />
+        {isWide && (isAuthenticated ? <UserInfo /> : <AuthNavigation />)}
         <SiteNavigation />
       </div>
     </CSSTransition>

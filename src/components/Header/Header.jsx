@@ -94,6 +94,7 @@ export default function Header() {
         <MobileMenu
           isOpen={isOpen}
           isWide={isWide}
+          isAuthenticated={isAuthenticated}
           onClick={handleClickNavItem}
         />
       )}
