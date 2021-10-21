@@ -8,21 +8,33 @@ import s from './AccountForm.module.scss';
 import authSelectors from '../../redux/auth/auth-selectors';
 import UploadButton from '../../components/UploadImage';
 import Modal from '../Modal';
+import Loader from 'react-loader-spinner';
 
 const AccountForm = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [isButton, setIsButton] = useState('');
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
   const user = useSelector(authSelectors.getUser);
+
   const dispatch = useDispatch();
   const onUpdate = useCallback(
-    state => dispatch(authOperations.updateUser(state)),
+    async state => {
+      setIsButton('update');
+      await dispatch(authOperations.updateUser(state));
+      setIsButton('');
+    },
     [dispatch],
   );
 
   const onDeleteUser = useCallback(
-    state => dispatch(authOperations.deleteUser(state)),
+    async state => {
+      handleCloseModal();
+      setIsButton('delete');
+      await dispatch(authOperations.deleteUser(state));
+      setIsButton('');
+    },
     [dispatch],
   );
 
@@ -97,7 +109,16 @@ const AccountForm = () => {
             variant="dashed"
             color="primary"
             className={s.submitButton}>
-            Update
+            {isButton === 'update' ? (
+              <Loader
+                type="ThreeDots"
+                color="#202020"
+                height="100%"
+                width={40}
+              />
+            ) : (
+              'Update'
+            )}
           </Button>
           <Button
             onClick={handleOpenModal}
@@ -105,7 +126,16 @@ const AccountForm = () => {
             variant="dashed"
             color="primary"
             className={s.deleteButton}>
-            Delete
+            {isButton === 'delete' ? (
+              <Loader
+                type="ThreeDots"
+                color="#202020"
+                height="100%"
+                width={40}
+              />
+            ) : (
+              'Delete'
+            )}
           </Button>
         </div>
       </form>
@@ -113,6 +143,7 @@ const AccountForm = () => {
         onDelete={onDeleteUser}
         open={openModal}
         handleClose={handleCloseModal}
+        title="Are you sure you want to delete this account?"
       />
     </>
   );

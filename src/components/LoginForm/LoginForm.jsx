@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, Formik, ErrorMessage } from 'formik';
 import { Link } from 'react-router-dom';
@@ -9,11 +9,17 @@ import authOperations from '../../redux/auth/auth-operation';
 import routes from '../../utils/routes';
 import { TextField, Button } from '@mui/material';
 import s from './LoginForm.module.scss';
+import Loader from 'react-loader-spinner';
 
 const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const onLogin = useCallback(
-    state => dispatch(authOperations.logIn(state)),
+    async state => {
+      setIsLoading(true);
+      await dispatch(authOperations.logIn(state));
+      setIsLoading(false);
+    },
     [dispatch],
   );
 
@@ -60,10 +66,20 @@ const LoginForm = () => {
           <Button
             type="submit"
             fullWidth
+            disabled={isLoading}
             variant="dashed"
             color="primary"
             className={s.submitButton}>
-            Log in
+            {isLoading ? (
+              <Loader
+                type="ThreeDots"
+                color="#202020"
+                height="100%"
+                width={40}
+              />
+            ) : (
+              'Log in'
+            )}
           </Button>
 
           <Link to={routes.register} className={s.registerLink}>

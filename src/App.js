@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import Header from './components/Header';
 import Notification from './components/Notification';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import Loader from './components/common/Loader';
 
 const HomePage = lazy(() =>
   import('./pages/HomePage' /* webpackChunkName: "home-page" */),
@@ -46,46 +47,24 @@ const App = () => {
           timeout={500}
           appear={true}
           unmountOnExit>
-          <Suspense
-            fallback={
-              <div
-                style={{
-                  position: 'absolute',
-                  width: '100%',
-                  height: '100%',
-                  background: '#000000',
-                }}></div>
-            }>
+          <Suspense fallback={<Loader />}>
             <Switch location={location}>
-              <PrivateRoute
-                exact
-                path={paths.home}
-                // restricted
-                redirectTo={paths.login}>
+              <PrivateRoute exact path={paths.home} redirectTo={paths.login}>
                 <HomePage />
               </PrivateRoute>
 
-              <PrivateRoute
-                exact
-                path={paths.todos}
-                restricted
-                redirectTo={paths.login}>
+              <PrivateRoute exact path={paths.todos} redirectTo={paths.login}>
                 <TasksPage />
               </PrivateRoute>
 
               <PrivateRoute
                 exact
                 path={paths.singleTodos}
-                // restricted
                 redirectTo={paths.login}>
                 <SingleTaskPage />
               </PrivateRoute>
 
-              <PrivateRoute
-                exact
-                path={paths.account}
-                // restricted
-                redirectTo={paths.login}>
+              <PrivateRoute exact path={paths.account} redirectTo={paths.login}>
                 <AccountPage />
               </PrivateRoute>
 

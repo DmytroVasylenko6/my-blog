@@ -38,7 +38,12 @@ const style = {
   pb: 3,
 };
 
-export default function ModalUnstyledDemo({ open, handleClose, onDelete }) {
+export default function ModalUnstyledDemo({
+  open,
+  handleClose,
+  onDelete,
+  title,
+}) {
   return (
     <div>
       <StyledModal
@@ -49,7 +54,7 @@ export default function ModalUnstyledDemo({ open, handleClose, onDelete }) {
         <Zoom in={open}>
           <Box sx={style}>
             <h2 className={s.titleModal} id="unstyled-modal-title">
-              Are you sure you want to delete this task?
+              {title}
             </h2>
             <div className={s.buttonContainer}>
               <button className={s.buttonYes} onClick={onDelete}>

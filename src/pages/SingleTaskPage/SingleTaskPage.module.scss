@@ -1,6 +1,7 @@
 .singleTaskPage {
   margin-top: 50px;
   padding-bottom: 100px;
+  position: relative;
 }
 
 .backButton {
@@ -128,4 +129,9 @@
   font-size: 14px;
   font-weight: 500;
   color: #c7c7c7;
+}
+
+.loaderContainer {
+  position: relative;
+  margin-top: 100px;
 }

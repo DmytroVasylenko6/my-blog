@@ -1,15 +1,21 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import s from './FormAddTask.module.scss';
 import { Formik, Form, ErrorMessage } from 'formik';
 import CustomError from '../common/CustomError';
 import { TextField, Button, Typography } from '@mui/material';
 import taskOperations from '../../redux/tasks/tasks-operations';
 import { useDispatch } from 'react-redux';
+import Loader from 'react-loader-spinner';
 
 export default function FormAddTask() {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const onAddTask = useCallback(
-    state => dispatch(taskOperations.taskAdd(state)),
+    async state => {
+      setIsLoading(true);
+      await dispatch(taskOperations.taskAdd(state));
+      setIsLoading(false);
+    },
     [dispatch],
   );
   return (
@@ -50,7 +56,16 @@ export default function FormAddTask() {
               variant="dashed"
               color="primary"
               className={s.submitButton}>
-              Add
+              {isLoading ? (
+                <Loader
+                  type="ThreeDots"
+                  color="#202020"
+                  height="100%"
+                  width={40}
+                />
+              ) : (
+                'Add'
+              )}
             </Button>
           </Form>
         )}

@@ -8,6 +8,9 @@
   border: 1px dashed #e2b076;
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container:hover .buttonUpdate,

@@ -7,8 +7,10 @@ import taskOperations from '../../redux/tasks/tasks-operations';
 import Modal from '../Modal';
 import { Link, useLocation } from 'react-router-dom';
 import convertDate from '../../utils/convertDate';
+import Loader from 'react-loader-spinner';
 
 export default function TaskCard({ id, description, createdAt, completed }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
@@ -17,9 +19,11 @@ export default function TaskCard({ id, description, createdAt, completed }) {
   const dispatch = useDispatch();
 
   const onDeleteTask = useCallback(
-    id => {
-      dispatch(taskOperations.taskDelete(id));
+    async id => {
       handleCloseModal();
+      setIsLoading(true);
+      await dispatch(taskOperations.taskDelete(id));
+      setIsLoading(false);
     },
     [dispatch],
   );
@@ -48,11 +52,17 @@ export default function TaskCard({ id, description, createdAt, completed }) {
             <span className={s.pending}>Incompleted</span>
           )}
         </div>
+        {isLoading && (
+          <div className={s.loaderContainer}>
+            <Loader type="ThreeDots" color="#fc842d" height="100%" width={40} />
+          </div>
+        )}
       </div>
       <Modal
         onDelete={() => onDeleteTask(id)}
         open={openModal}
         handleClose={handleCloseModal}
+        title="Are you sure you want to delete this task?"
       />
     </>
   );

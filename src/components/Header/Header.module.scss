@@ -2,7 +2,8 @@
   position: relative;
   display: block;
   width: 100%;
-  z-index: 999;
+  background-color: #171717;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.73);
 }
 
 .container {
@@ -10,10 +11,13 @@
   z-index: 999;
   max-width: 1080px;
   width: 100%;
-  padding: 15px 30px;
+  padding: 15px 15px;
   margin: 0 auto;
-  background-color: #171717;
-  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.73);
+
+  @media screen and (max-width: 900px) {
+    background-color: #171717;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.73);
+  }
 }
 
 .logo {
