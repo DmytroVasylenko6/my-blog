@@ -32,7 +32,7 @@ export default function Header() {
 
   const toggling = () => setIsOpen(!isOpen);
   const handleClickNavItem = e => {
-    if (e.target.nodeName === 'A') {
+    if (e.target.nodeName === 'A' || e.target.nodeName === 'BUTTON') {
       setIsOpen(!isOpen);
     }
   };

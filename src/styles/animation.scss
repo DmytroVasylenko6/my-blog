@@ -34,3 +34,55 @@
   opacity: 0;
   transition: opacity 1500ms;
 }
+
+.task-scale-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 250ms linear;
+}
+
+.task-scale-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.task-scale-exit-active {
+  opacity: 0;
+  transform: scale(0.7);
+  transition: all 250ms linear;
+}
+
+.task-scale-appear {
+  transform: scale(0.9);
+  opacity: 0;
+}
+
+.task-scale-appear-active {
+  transform: scale(1);
+  opacity: 1;
+  transition: all 250ms linear;
+}
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}
+
+.fade-exit {
+  position: absolute;
+  z-index: -10;
+  opacity: 0;
+  display: none;
+}
+
+.fade-exit-active {
+  position: absolute;
+  z-index: -10;
+  opacity: 0;
+  display: none;
+}
