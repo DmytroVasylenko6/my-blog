@@ -14,11 +14,18 @@ import authReducer from './auth/auth-reducer';
 import notifStatusReducer from './notification/notif-reducer';
 import tasksReducer from './tasks/tasks-reducer';
 import { IUser, TAvatar, TToken, TIsAuth } from './auth/auth-types';
+import themeModeReducer from './themeMode/themeMode-reducers';
+import ITheme from './themeMode/themeMode-types';
 
 const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['user', 'token', 'isAuthenticated'],
+};
+
+const themePersistConfig = {
+  key: 'theme',
+  storage,
 };
 
 interface IAuthReducer {
@@ -33,6 +40,7 @@ export const store = configureStore({
     auth: persistReducer<IAuthReducer, any>(authPersistConfig, authReducer),
     tasks: tasksReducer,
     notification: notifStatusReducer,
+    theme: persistReducer<ITheme, any>(themePersistConfig, themeModeReducer),
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

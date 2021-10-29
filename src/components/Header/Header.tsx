@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import s from './Header.module.scss';
 import Logo from '../../images/logo.png';
+import { Link } from 'react-router-dom';
+import routes from '../../utils/routes';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import authSelectors from '../../redux/auth/auth-selectors';
 import UserInfo from '../UserInfo';
@@ -11,6 +13,7 @@ import authOperations from '../../redux/auth/auth-operation';
 import { useMedia } from 'react-use';
 import classNames from 'classnames';
 import MobileMenu from '../MobileMenu';
+import ThemeMode from '../ThemeMode';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -40,8 +43,8 @@ export default function Header() {
   };
 
   return (
-    <header className={s.header}>
-      <div className={s.container}>
+    <header className={classNames([s.header, 'theme-header'].join(' '))}>
+      <div className={classNames([s.container, 'container'].join(' '))}>
         <Grid
           container
           direction="row"
@@ -55,6 +58,7 @@ export default function Header() {
               justifyContent="space-between"
               alignItems="center">
               <Grid item>
+                <Link to={routes.home}>
                 <img
                   className={s.logo}
                   src={Logo}
@@ -62,6 +66,7 @@ export default function Header() {
                   height="60"
                   width="60"
                 />
+                </Link>
               </Grid>
               {!isWide && (
                 <Grid item>
@@ -70,9 +75,14 @@ export default function Header() {
               )}
             </Grid>
           </Grid>
-          <Grid item>
-            {!isWide && (isAuthenticated ? <UserInfo /> : <AuthNavigation />)}
-          </Grid>
+          
+          {!isWide && (
+            <Grid item display="flex" alignItems="center">
+              {isAuthenticated ? <UserInfo /> : <AuthNavigation />}
+              <ThemeMode/>
+            </Grid>
+          )}
+         
 
           {isWide && (
             <Grid item>
