@@ -6,6 +6,7 @@ import authSelectors from '../../redux/auth/auth-selectors';
 import authOperations from '../../redux/auth/auth-operation';
 import defaultAvatar from '../../images/default-user.png';
 import Loader from 'react-loader-spinner';
+import { FormattedMessage } from 'react-intl';
 
 const Input = styled('input')({
   display: 'none',
@@ -24,12 +25,11 @@ export default function UploadButton() {
 
   const onChangeInput = async (e: Event<HTMLInputElement>) => {
     if (user._id) {
-       let files: any = e.target.files; 
-       setIsUpload(true);
-       await dispatch(authOperations.uploadAvatar(files[0], user._id));
-       setIsUpload(false);
+      let files: any = e.target.files;
+      setIsUpload(true);
+      await dispatch(authOperations.uploadAvatar(files[0], user._id));
+      setIsUpload(false);
     }
-
   };
 
   return (
@@ -50,7 +50,12 @@ export default function UploadButton() {
             <img className={s.avatar} src={avatar} alt="avatar" />
             <div className={s.buttonUpdate}>
               <span className={s.icon}>+</span>
-              <span className={s.text}>Update Avatar</span>
+              <span className={s.text}>
+                <FormattedMessage
+                  id="app.avatar.update"
+                  defaultMessage="Update Avatar"
+                />
+              </span>
             </div>
           </>
         ) : (
@@ -58,7 +63,12 @@ export default function UploadButton() {
             <img className={s.avatar} src={defaultAvatar} alt="avatar" />
             <div className={s.buttonUpload}>
               <span className={s.icon}>+</span>
-              <span className={s.text}>Upload Avatar</span>
+              <span className={s.text}>
+                <FormattedMessage
+                  id="app.avatar.upload"
+                  defaultMessage="Upload Avatar"
+                />
+              </span>
             </div>
           </>
         )}

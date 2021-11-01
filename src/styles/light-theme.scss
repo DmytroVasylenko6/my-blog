@@ -1,5 +1,5 @@
 body.light {
-  background-color: #f5f5f5;
+  background-color: #ebebeb;
 }
 
 .light {
@@ -14,13 +14,54 @@ body.light {
   }
 
   & .nav-menu {
-    background-color: #f5f5f5;
+    background-color: #ebebeb;
   }
 
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
-    box-shadow: 0 0 0 30px #f5f5f5 inset !important;
+    box-shadow: 0 0 0 30px #ebebeb inset !important;
+  }
+
+  & .theme-light-text {
+    color: #202020;
+
+    &:before,
+    &:after {
+      background-color: #202020;
+    }
+  }
+
+  & .theme-light-hover:hover {
+    color: #424242;
+  }
+
+  & .theme-light-link-active {
+    font-weight: 700;
+  }
+
+  & .theme-light-border {
+    border-color: #202020;
+  }
+
+  & .theme-light-completed {
+    color: #7134f5;
+  }
+
+  & .theme-light-incompleted {
+    color: #f39d83;
+  }
+
+  & .theme-light-loader div::after {
+    background: #202020;
+  }
+
+  & .theme-light-button {
+    background-color: #7134f5;
+
+    &:hover {
+      background-color: #5f15ff;
+    }
   }
 }

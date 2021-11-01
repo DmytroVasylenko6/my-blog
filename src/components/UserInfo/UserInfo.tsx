@@ -6,6 +6,8 @@ import s from './UserInfo.module.scss';
 import { Link } from 'react-router-dom';
 import routes from '../../utils/routes';
 import defaultAvatar from '../../images/default-user.png';
+import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 
 export default function UserInfo() {
   const user = useAppSelector(authSelectors.getUser);
@@ -28,10 +30,17 @@ export default function UserInfo() {
           />
         )}
 
-        <span className={s.nickName}>{user.name}</span>
+        <span
+          className={classNames([s.nickName, 'theme-light-text'].join(' '))}>
+          {user.name}
+        </span>
       </Link>
-      <button onClick={() => onLogout()} className={s.logOutButton}>
-        Logout
+      <button
+        onClick={() => onLogout()}
+        className={classNames(
+          [s.logOutButton, 'theme-light-text', 'theme-light-hover'].join(' '),
+        )}>
+        <FormattedMessage id="app.header.nav.logout" defaultMessage="Logout" />
       </button>
     </div>
   );

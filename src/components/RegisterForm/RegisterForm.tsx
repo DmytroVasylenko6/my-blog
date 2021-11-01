@@ -9,6 +9,8 @@ import routes from '../../utils/routes';
 import authOperations from '../../redux/auth/auth-operation';
 import Loader from 'react-loader-spinner';
 import s from './RegisterForm.module.scss';
+import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 
 interface IValues {
   name: string | null;
@@ -49,7 +51,12 @@ const RegisterForm = () => {
             required
             fullWidth
             id="name"
-            label="Name"
+            label={
+              <FormattedMessage
+                id="app.registerform.name"
+                defaultMessage="Name"
+              />
+            }
             name="name"
             type="text"
             autoFocus
@@ -57,7 +64,17 @@ const RegisterForm = () => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <ErrorMessage  render={message => <CustomError>{message}</CustomError>} name="name" />
+          <ErrorMessage
+            render={message => (
+              <CustomError>
+                <FormattedMessage
+                  id={message}
+                  defaultMessage="This field is error!"
+                />
+              </CustomError>
+            )}
+            name="name"
+          />
 
           <TextField
             variant="outlined"
@@ -65,42 +82,87 @@ const RegisterForm = () => {
             required
             fullWidth
             name="email"
-            label="Email"
+            label={
+              <FormattedMessage
+                id="app.registerform.email"
+                defaultMessage="Email"
+              />
+            }
             type="email"
             id="email"
             error={errors.email && touched.email ? true : false}
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <ErrorMessage  render={message => <CustomError>{message}</CustomError>} name="email" />
+          <ErrorMessage
+            render={message => (
+              <CustomError>
+                <FormattedMessage
+                  id={message}
+                  defaultMessage="This field is error!"
+                />
+              </CustomError>
+            )}
+            name="email"
+          />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             name="password"
-            label="Password"
+            label={
+              <FormattedMessage
+                id="app.registerform.password"
+                defaultMessage="Password"
+              />
+            }
             type="password"
             id="password"
             error={errors.password && touched.password ? true : false}
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <ErrorMessage  render={message => <CustomError>{message}</CustomError>} name="password" />
+          <ErrorMessage
+            render={message => (
+              <CustomError>
+                <FormattedMessage
+                  id={message}
+                  defaultMessage="This field is error!"
+                />
+              </CustomError>
+            )}
+            name="password"
+          />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             name="age"
-            label="age"
+            label={
+              <FormattedMessage
+                id="app.registerform.age"
+                defaultMessage="Age"
+              />
+            }
             type="number"
             id="age"
             error={errors.age && touched.age ? true : false}
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <ErrorMessage  render={message => <CustomError>{message}</CustomError>} name="age" />
+          <ErrorMessage
+            render={message => (
+              <CustomError>
+                <FormattedMessage
+                  id={message}
+                  defaultMessage="This field is error!"
+                />
+              </CustomError>
+            )}
+            name="age"
+          />
 
           <Button
             type="submit"
@@ -116,12 +178,22 @@ const RegisterForm = () => {
                 width={40}
               />
             ) : (
-              'Register'
+              <FormattedMessage
+                id="app.registerform.button"
+                defaultMessage="Register"
+              />
             )}
           </Button>
 
-          <Link to={routes.login} className={s.loginLink}>
-            Go to login
+          <Link
+            to={routes.login}
+            className={classNames(
+              [s.loginLink, 'theme-light-text', 'theme-light-hover'].join(' '),
+            )}>
+            <FormattedMessage
+              id="app.registerform.link"
+              defaultMessage="Go to login"
+            />
           </Link>
         </Form>
       )}

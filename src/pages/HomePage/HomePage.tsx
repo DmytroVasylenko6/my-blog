@@ -4,18 +4,26 @@ import { Typography } from '@mui/material';
 import s from './HomePage.module.scss';
 import image from '../../images/chermander.gif';
 import routes from '../../utils/routes';
+import { FormattedMessage } from 'react-intl';
 
 const HomePage = () => {
   return (
     <div className={s.homePage}>
       <Container>
         <Typography gutterBottom={true} variant="h1">
-          Welcome!
+          <FormattedMessage id="app.homepage.title" defaultMessage="Welcome!" />
         </Typography>
         <Typography variant="h2">
-          Your to-do list is waiting for you. <br />
+          <FormattedMessage
+            id="app.homepage.subtitle"
+            defaultMessage="Your to-do list is waiting for you."
+          />
+          <br />
           <Link className={s.link} to={routes.todos}>
-            Click here
+            <FormattedMessage
+              id="app.homepage.link"
+              defaultMessage="Click here"
+            />
           </Link>
         </Typography>
         <div className={s.imageContainer}>

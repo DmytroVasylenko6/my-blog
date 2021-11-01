@@ -10,8 +10,7 @@ import { Grid } from '@mui/material';
 import TaskCard from '../../components/TaskCard';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import CustomLoader from '../../components/common/Loader';
-
-
+import { FormattedMessage } from 'react-intl';
 
 const TodosPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -34,7 +33,10 @@ const TodosPage = () => {
     <div className={s.todosPage}>
       <Container>
         <Typography gutterBottom={true} variant="h1">
-          Your tasks!
+          <FormattedMessage
+            id="app.taskspage.title"
+            defaultMessage="Your tasks!"
+          />
         </Typography>
         <Grid
           container

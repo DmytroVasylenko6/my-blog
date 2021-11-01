@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import s from './Header.module.scss';
 import Logo from '../../images/logo.png';
+import LogoDark from '../../images/logo-dark.png';
 import { Link } from 'react-router-dom';
 import routes from '../../utils/routes';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
@@ -14,10 +15,12 @@ import { useMedia } from 'react-use';
 import classNames from 'classnames';
 import MobileMenu from '../MobileMenu';
 import ThemeMode from '../ThemeMode';
+import LanguageSelect from '../LanguageSelect';
+import getTheme from '../../redux/themeMode/themeMode-selector';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  const theme = useAppSelector(getTheme);
   const user = useAppSelector(authSelectors.getUser);
   const isAuthenticated = useAppSelector(authSelectors.getIsAuthenticated);
   const isWide = useMedia('(max-width: 900px)');
@@ -36,8 +39,8 @@ export default function Header() {
 
   const toggling = () => setIsOpen(!isOpen);
   const handleClickNavItem = (e: React.MouseEvent<HTMLDivElement>): void => {
-    let element = e.target as HTMLElement 
-    if (element.nodeName === 'A' ||  element.nodeName === 'BUTTON') {
+    let element = e.target as HTMLElement;
+    if (element.nodeName === 'A' || element.nodeName === 'BUTTON') {
       setIsOpen(!isOpen);
     }
   };
@@ -59,13 +62,13 @@ export default function Header() {
               alignItems="center">
               <Grid item>
                 <Link to={routes.home}>
-                <img
-                  className={s.logo}
-                  src={Logo}
-                  alt="logo"
-                  height="60"
-                  width="60"
-                />
+                  <img
+                    className={s.logo}
+                    src={theme === 'dark' ? Logo : LogoDark}
+                    alt="logo"
+                    height="60"
+                    width="60"
+                  />
                 </Link>
               </Grid>
               {!isWide && (
@@ -75,14 +78,14 @@ export default function Header() {
               )}
             </Grid>
           </Grid>
-          
+
           {!isWide && (
             <Grid item display="flex" alignItems="center">
               {isAuthenticated ? <UserInfo /> : <AuthNavigation />}
-              <ThemeMode/>
+              <ThemeMode />
+              <LanguageSelect />
             </Grid>
           )}
-         
 
           {isWide && (
             <Grid item>

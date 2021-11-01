@@ -6,9 +6,10 @@ import { TextField, Button, Typography } from '@mui/material';
 import taskOperations from '../../redux/tasks/tasks-operations';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import Loader from 'react-loader-spinner';
+import { FormattedMessage } from 'react-intl';
 
 interface IValues {
-  description: string
+  description: string;
 }
 
 export default function FormAddTask() {
@@ -25,7 +26,10 @@ export default function FormAddTask() {
   return (
     <>
       <Typography variant="h3" component="h3">
-        Add new task
+        <FormattedMessage
+          id="app.addtaskform.title"
+          defaultMessage="Add new task"
+        />
       </Typography>
       <Formik
         initialValues={{
@@ -44,7 +48,12 @@ export default function FormAddTask() {
               required
               fullWidth
               id="description"
-              label="Your task"
+              label={
+                <FormattedMessage
+                  id="app.addtaskform.label"
+                  defaultMessage="Your task"
+                />
+              }
               name="description"
               autoFocus
               multiline
@@ -53,7 +62,10 @@ export default function FormAddTask() {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <ErrorMessage render={message => <CustomError>{message}</CustomError>} name="description" />
+            <ErrorMessage
+              render={message => <CustomError>{message}</CustomError>}
+              name="description"
+            />
             <Button
               type="submit"
               fullWidth
@@ -68,7 +80,10 @@ export default function FormAddTask() {
                   width={40}
                 />
               ) : (
-                'Add'
+                <FormattedMessage
+                  id="app.addtaskform.button"
+                  defaultMessage="Add"
+                />
               )}
             </Button>
           </Form>

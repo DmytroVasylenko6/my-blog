@@ -71,14 +71,14 @@ export const themeLight = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: {
-          borderColor: '#e2b076',
+          borderColor: '#202020',
         },
       },
     },
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: '#e2b076',
+          color: '#202020',
         },
       },
     },
@@ -86,11 +86,11 @@ export const themeLight = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          color: 'unset',
-          backgroundColor: '#e7984f',
+          color: '#ffffff',
+          backgroundColor: '#7134f5',
           padding: ' 16.5px 14px;',
           '&:hover': {
-            backgroundColor: '#d0833b',
+            backgroundColor: '#5f15ff',
           },
         },
       },
@@ -99,20 +99,20 @@ export const themeLight = createTheme({
     MuiTypography: {
       styleOverrides: {
         h1: {
-          color: '#e2b076',
+          color: '#202020',
           textAlign: 'center',
           fontSize: '4rem',
           fontWeight: 'bold',
         },
         h2: {
-          color: '#e2b076',
+          color: '#202020',
           textAlign: 'center',
           fontSize: '2rem',
           fontWeight: 'normal',
         },
 
         h3: {
-          color: '#e2b076',
+          color: '#202020',
           textAlign: 'center',
           fontSize: '2rem',
           fontWeight: 'normal',
@@ -124,10 +124,10 @@ export const themeLight = createTheme({
     mode: 'light',
 
     primary: {
-      main: '#e2b076',
+      main: '#202020',
     },
     secondary: {
-      main: '#e2b076',
+      main: '#202020',
     },
   },
 });

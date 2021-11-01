@@ -1,6 +1,8 @@
 import s from './SiteNavigation.module.scss';
 import { NavLink } from 'react-router-dom';
 import routes from '../../utils/routes';
+import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 
 export default function SiteNavigation() {
   return (
@@ -10,25 +12,43 @@ export default function SiteNavigation() {
           <NavLink
             exact
             to={routes.home}
-            activeClassName={s.activeNavLink}
-            className={s.navLink}>
-            Home
+            activeClassName={classNames(
+              [s.activeNavLink, 'theme-light-link-active'].join(' '),
+            )}
+            className={classNames(
+              [s.navLink, 'theme-light-text', 'theme-light-hover'].join(' '),
+            )}>
+            <FormattedMessage id="app.header.nav.home" defaultMessage="Home" />
           </NavLink>
         </li>
         <li className={s.navItem}>
           <NavLink
             to={routes.todos}
-            activeClassName={s.activeNavLink}
-            className={s.navLink}>
-            Tasks
+            activeClassName={classNames(
+              [s.activeNavLink, 'theme-light-link-active'].join(' '),
+            )}
+            className={classNames(
+              [s.navLink, 'theme-light-text', 'theme-light-hover'].join(' '),
+            )}>
+            <FormattedMessage
+              id="app.header.nav.tasks"
+              defaultMessage="Tasks"
+            />
           </NavLink>
         </li>
         <li className={s.navItem}>
           <NavLink
             to={routes.account}
-            activeClassName={s.activeNavLink}
-            className={s.navLink}>
-            Account
+            activeClassName={classNames(
+              [s.activeNavLink, 'theme-light-link-active'].join(' '),
+            )}
+            className={classNames(
+              [s.navLink, 'theme-light-text', 'theme-light-hover'].join(' '),
+            )}>
+            <FormattedMessage
+              id="app.header.nav.account"
+              defaultMessage="Account"
+            />
           </NavLink>
         </li>
       </ul>

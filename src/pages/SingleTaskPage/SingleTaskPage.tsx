@@ -12,14 +12,15 @@ import todosAPI from '../../utils/todosAPI';
 import notifInfo from '../../redux/notification/notif-actions';
 import Loader from 'react-loader-spinner';
 import CustomLoader from '../../components/common/Loader';
-
+import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 
 interface ILocation {
   from: string;
 }
 
 interface IParams {
-  todosId: string | number
+  todosId: string | number;
 }
 
 interface ITodo {
@@ -34,7 +35,7 @@ const initialTodo: ITodo = {
   description: '',
   createdAt: '',
   updatedAt: '',
-} as ITodo
+} as ITodo;
 
 function SingleTaskPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -76,31 +77,30 @@ function SingleTaskPage() {
   const onClickUpdateTask = async () => {
     setIsUpdate('update');
     if (todo) {
-       try {
-      const response = await todosAPI.updateTaskById(todosId, {
-        completed: !todo.completed,
-      });
-      setTodo(response.data.data);
-      dispatch(
-        notifInfo({
-          message: 'Task successfully updated!',
-          status: true,
-          severity: 'success',
-        }),
-      );
-      setIsUpdate('');
-    } catch (error: any) {
-      dispatch(
-        notifInfo({
-          message: error.message,
-          status: true,
-          severity: 'error',
-        }),
-      );
-      setIsUpdate('');
+      try {
+        const response = await todosAPI.updateTaskById(todosId, {
+          completed: !todo.completed,
+        });
+        setTodo(response.data.data);
+        dispatch(
+          notifInfo({
+            message: 'Task successfully updated!',
+            status: true,
+            severity: 'success',
+          }),
+        );
+        setIsUpdate('');
+      } catch (error: any) {
+        dispatch(
+          notifInfo({
+            message: error.message,
+            status: true,
+            severity: 'error',
+          }),
+        );
+        setIsUpdate('');
+      }
     }
-    }
-   
   };
 
   const onClickDeleteTask = async () => {
@@ -121,10 +121,16 @@ function SingleTaskPage() {
     <div className={s.singleTaskPage}>
       <Container>
         <button className={s.backButton} onClick={handleGoBack}>
-          Go back
+          <FormattedMessage
+            id="app.singletaskpage.back"
+            defaultMessage="Go back"
+          />
         </button>
         <Typography gutterBottom={true} variant="h1">
-          Single Task
+          <FormattedMessage
+            id="app.singletaskpage.title"
+            defaultMessage="Task"
+          />
         </Typography>
         {isLoading ? (
           <div className={s.loaderContainer}>
@@ -133,26 +139,62 @@ function SingleTaskPage() {
         ) : (
           todo && (
             <div className={s.container}>
-              <div className={s.textContainer}>
-                <p className={s.text}>{todo?.description}</p>
+              <div
+                className={classNames(
+                  [s.textContainer, 'theme-light-border'].join(' '),
+                )}>
+                <p
+                  className={classNames(
+                    [s.text, 'theme-light-text'].join(' '),
+                  )}>
+                  {todo?.description}
+                </p>
                 <div className={s.footerCard}>
                   <div className={s.timeContainer}>
                     <time className={s.time} dateTime={todo?.createdAt}>
-                      Created: {convertDate(todo?.createdAt)}
+                      <FormattedMessage
+                        id="app.singletaskpage.created"
+                        defaultMessage="Created: "
+                      />
+                      {convertDate(todo?.createdAt)}
                     </time>
                     <time className={s.time} dateTime={todo?.updatedAt}>
-                      Updated: {convertDate(todo?.updatedAt)}
+                      <FormattedMessage
+                        id="app.singletaskpage.updated"
+                        defaultMessage="Updated: "
+                      />
+                      {convertDate(todo?.updatedAt)}
                     </time>
                   </div>
                   {todo?.completed ? (
-                    <span className={s.completed}>Completed</span>
+                    <span
+                      className={classNames(
+                        [s.completed, 'theme-light-completed'].join(' '),
+                      )}>
+                      <FormattedMessage
+                        id="app.singletaskpage.completed"
+                        defaultMessage="Completed"
+                      />
+                    </span>
                   ) : (
-                    <span className={s.pending}>Incompleted</span>
+                    <span
+                      className={classNames(
+                        [s.pending, 'theme-light-incompleted'].join(' '),
+                      )}>
+                      <FormattedMessage
+                        id="app.singletaskpage.incompleted"
+                        defaultMessage="Incompleted"
+                      />
+                    </span>
                   )}
                 </div>
               </div>
               <div className={s.buttonContainer}>
-                <button onClick={onClickUpdateTask} className={s.updateBtn}>
+                <button
+                  onClick={onClickUpdateTask}
+                  className={classNames(
+                    [s.updateBtn, 'theme-light-button'].join(' '),
+                  )}>
                   {isUpdate === 'update' ? (
                     <Loader
                       type="ThreeDots"
@@ -161,9 +203,15 @@ function SingleTaskPage() {
                       width={40}
                     />
                   ) : !todo?.completed ? (
-                    'Check completed'
+                    <FormattedMessage
+                      id="app.singletaskpage.button.completed"
+                      defaultMessage="To complete"
+                    />
                   ) : (
-                    'Check incompleted'
+                    <FormattedMessage
+                      id="app.singletaskpage.button.incompleted"
+                      defaultMessage="Cancel completion"
+                    />
                   )}
                 </button>
                 <button onClick={handleOpenModal} className={s.deleteBtn}>
@@ -175,7 +223,10 @@ function SingleTaskPage() {
                       width={40}
                     />
                   ) : (
-                    'Delete'
+                    <FormattedMessage
+                      id="app.singletaskpage.button.delete"
+                      defaultMessage="Delete"
+                    />
                   )}
                 </button>
               </div>
@@ -187,7 +238,12 @@ function SingleTaskPage() {
         onDelete={onClickDeleteTask}
         open={openModal}
         handleClose={handleCloseModal}
-        title="Are you sure you want to delete this task?"
+        title={
+          <FormattedMessage
+            id="app.singletaskpage.modal.title"
+            defaultMessage="Are you sure you want to delete this task?"
+          />
+        }
       />
     </div>
   );

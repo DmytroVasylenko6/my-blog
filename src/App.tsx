@@ -1,4 +1,4 @@
-import  { Suspense, lazy, useEffect } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Switch, Redirect, useLocation } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
@@ -13,28 +13,25 @@ import { ThemeProvider } from '@mui/material/styles';
 import { themeDark, themeLight } from './utils/themeStyles';
 import getTheme from './redux/themeMode/themeMode-selector';
 
-
-
-
-const HomePage = lazy(() =>
-  import('./pages/HomePage' /* webpackChunkName: "home-page" */),
+const HomePage = lazy(
+  () => import('./pages/HomePage' /* webpackChunkName: "home-page" */),
 );
-const TasksPage = lazy(() =>
-  import('./pages/TasksPage' /* webpackChunkName: "tasks-page" */),
+const TasksPage = lazy(
+  () => import('./pages/TasksPage' /* webpackChunkName: "tasks-page" */),
 );
-const SingleTaskPage = lazy(() =>
-  import('./pages/SingleTaskPage' /* webpackChunkName: "singleTask-page" */),
+const SingleTaskPage = lazy(
+  () =>
+    import('./pages/SingleTaskPage' /* webpackChunkName: "singleTask-page" */),
 );
-const RegisterPage = lazy(() =>
-  import('./pages/RegisterPage' /* webpackChunkName: "register-page" */),
+const RegisterPage = lazy(
+  () => import('./pages/RegisterPage' /* webpackChunkName: "register-page" */),
 );
-const LoginPage = lazy(() =>
-  import('./pages/LoginPage' /* webpackChunkName: "login-page" */),
+const LoginPage = lazy(
+  () => import('./pages/LoginPage' /* webpackChunkName: "login-page" */),
 );
-const AccountPage = lazy(() =>
-  import('./pages/AccountPage' /* webpackChunkName: "account-page" */),
+const AccountPage = lazy(
+  () => import('./pages/AccountPage' /* webpackChunkName: "account-page" */),
 );
-
 
 const App = () => {
   let location = useLocation();
@@ -56,9 +53,8 @@ const App = () => {
     }
   }, [mode]);
 
-
   return (
-      <ThemeProvider theme={mode === 'dark' ? themeDark : themeLight}>
+    <ThemeProvider theme={mode === 'dark' ? themeDark : themeLight}>
       <Header />
 
       <TransitionGroup component="main">

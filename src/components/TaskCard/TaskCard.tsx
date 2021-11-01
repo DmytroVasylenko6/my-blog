@@ -7,15 +7,22 @@ import Modal from '../Modal';
 import { Link, useLocation } from 'react-router-dom';
 import convertDate from '../../utils/convertDate';
 import Loader from 'react-loader-spinner';
+import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 
 interface IProp {
-  id: string | number,
-  description: string,
-  createdAt: string,
-  completed: boolean
+  id: string | number;
+  description: string;
+  createdAt: string;
+  completed: boolean;
 }
 
-export default function TaskCard({ id, description, createdAt, completed }: IProp) {
+export default function TaskCard({
+  id,
+  description,
+  createdAt,
+  completed,
+}: IProp) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const handleOpenModal = () => setOpenModal(true);
@@ -36,7 +43,10 @@ export default function TaskCard({ id, description, createdAt, completed }: IPro
 
   return (
     <>
-      <div className={s.singleTaskContainer}>
+      <div
+        className={classNames(
+          [s.singleTaskContainer, 'theme-light-border'].join(' '),
+        )}>
         <button className={s.buttonClose} onClick={handleOpenModal}>
           <img src={iconClose} alt="icon cross" />
         </button>
@@ -46,16 +56,37 @@ export default function TaskCard({ id, description, createdAt, completed }: IPro
             pathname: location.pathname + '/' + id,
             state: { from: location },
           }}>
-          <p className={s.singleTaskText}>{description}</p>
+          <p
+            className={classNames(
+              [s.singleTaskText, 'theme-light-text'].join(' '),
+            )}>
+            {description}
+          </p>
         </Link>
         <div className={s.footerCard}>
           <time className={s.time} dateTime={createdAt}>
             {convertDate(createdAt)}
           </time>
           {completed ? (
-            <span className={s.completed}>Completed</span>
+            <span
+              className={classNames(
+                [s.completed, 'theme-light-completed'].join(' '),
+              )}>
+              <FormattedMessage
+                id="app.taskcard.completed"
+                defaultMessage="Completed"
+              />
+            </span>
           ) : (
-            <span className={s.pending}>Incompleted</span>
+            <span
+              className={classNames(
+                [s.pending, 'theme-light-incompleted'].join(' '),
+              )}>
+              <FormattedMessage
+                id="app.taskcard.incompleted"
+                defaultMessage="Incompleted"
+              />
+            </span>
           )}
         </div>
         {isLoading && (
@@ -68,9 +99,13 @@ export default function TaskCard({ id, description, createdAt, completed }: IPro
         onDelete={() => onDeleteTask(id)}
         open={openModal}
         handleClose={handleCloseModal}
-        title="Are you sure you want to delete this task?"
+        title={
+          <FormattedMessage
+            id="app.taskcard.modal.title"
+            defaultMessage="Are you sure you want to delete this task?"
+          />
+        }
       />
     </>
   );
 }
-

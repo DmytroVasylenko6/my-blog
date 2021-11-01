@@ -9,6 +9,8 @@ import routes from '../../utils/routes';
 import { TextField, Button } from '@mui/material';
 import s from './LoginForm.module.scss';
 import Loader from 'react-loader-spinner';
+import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 
 interface IValues {
   email: string | null;
@@ -45,28 +47,58 @@ const LoginForm = () => {
             required
             fullWidth
             id="email"
-            label="Email"
+            label={
+              <FormattedMessage
+                id="app.loginform.email"
+                defaultMessage="Email"
+              />
+            }
             name="email"
             autoFocus
             error={errors.email && touched.email ? true : false}
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <ErrorMessage render={message => <CustomError>{message}</CustomError>} name="email" />
+          <ErrorMessage
+            render={message => (
+              <CustomError>
+                <FormattedMessage
+                  id={message}
+                  defaultMessage="This field is error!"
+                />
+              </CustomError>
+            )}
+            name="email"
+          />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             name="password"
-            label="Password"
+            label={
+              <FormattedMessage
+                id="app.loginform.password"
+                defaultMessage="Password"
+              />
+            }
             type="password"
             id="password"
             error={errors.password && touched.password ? true : false}
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <ErrorMessage render={message => <CustomError>{message}</CustomError>} name="password" />
+          <ErrorMessage
+            render={message => (
+              <CustomError>
+                <FormattedMessage
+                  id={message}
+                  defaultMessage="This field is error!"
+                />
+              </CustomError>
+            )}
+            name="password"
+          />
           <Button
             type="submit"
             fullWidth
@@ -82,12 +114,24 @@ const LoginForm = () => {
                 width={40}
               />
             ) : (
-              'Log in'
+              <FormattedMessage
+                id="app.loginform.button"
+                defaultMessage="Log in"
+              />
             )}
           </Button>
 
-          <Link to={routes.register} className={s.registerLink}>
-            Go to registration
+          <Link
+            to={routes.register}
+            className={classNames(
+              [s.registerLink, 'theme-light-text', 'theme-light-hover'].join(
+                ' ',
+              ),
+            )}>
+            <FormattedMessage
+              id="app.loginform.link"
+              defaultMessage="Go to registration"
+            />
           </Link>
         </Form>
       )}
