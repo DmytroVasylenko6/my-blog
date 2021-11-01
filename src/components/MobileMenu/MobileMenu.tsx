@@ -6,6 +6,7 @@ import AuthNavigation from '../AuthNavigation';
 import s from './MobileMenu.module.scss';
 import ThemeMode from '../ThemeMode';
 import classNames from 'classnames';
+import LanguageSelect from '../LanguageSelect';
 
 interface IProps {
   isOpen: boolean;
@@ -25,10 +26,10 @@ export default function MobileMenu({
 
   if (body) {
     if (isOpen && isWide) {
-    body.classList.add('scroll-hidden');
-  } else {
-    body.classList.remove('scroll-hidden');
-  }
+      body.classList.add('scroll-hidden');
+    } else {
+      body.classList.remove('scroll-hidden');
+    }
   }
 
   useEffect(() => {
@@ -50,10 +51,19 @@ export default function MobileMenu({
       timeout={500}
       classNames="burger-animation"
       unmountOnExit>
-      <div ref={nav} className={classNames([s.mobileNav, 'nav-menu'].join(' '))} id="header_nav">
-        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <div
+        ref={nav}
+        className={classNames([s.mobileNav, 'nav-menu'].join(' '))}
+        id="header_nav">
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
           {isWide && (isAuthenticated ? <UserInfo /> : <AuthNavigation />)}
-          <ThemeMode/>
+          <ThemeMode />
+          <LanguageSelect />
         </div>
         <SiteNavigation />
       </div>
