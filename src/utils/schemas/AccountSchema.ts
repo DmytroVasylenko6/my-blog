@@ -9,11 +9,9 @@ const accountSchema = Yup.object().shape({
     .email('app.yup.validate.email')
     .required('app.yup.validate.required'),
   age: Yup.number()
-    .min(6, 'app.yup.validate.age.min')
+    .min(5, 'app.yup.validate.age.min')
     .max(120, 'app.yup.validate.age.max')
-    .required('app.yup.validate.required')
-    .positive()
-    .integer(),
+    .required('app.yup.validate.required'),
 });
 
 export default accountSchema;

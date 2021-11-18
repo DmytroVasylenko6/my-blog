@@ -13,23 +13,23 @@ import { ThemeProvider } from '@mui/material/styles';
 import { themeDark, themeLight } from './utils/themeStyles';
 import getTheme from './redux/themeMode/themeMode-selector';
 
-const HomePage = lazy(
+export const HomePage = lazy(
   () => import('./pages/HomePage' /* webpackChunkName: "home-page" */),
 );
-const TasksPage = lazy(
+export const TasksPage = lazy(
   () => import('./pages/TasksPage' /* webpackChunkName: "tasks-page" */),
 );
-const SingleTaskPage = lazy(
+export const SingleTaskPage = lazy(
   () =>
     import('./pages/SingleTaskPage' /* webpackChunkName: "singleTask-page" */),
 );
-const RegisterPage = lazy(
+export const RegisterPage = lazy(
   () => import('./pages/RegisterPage' /* webpackChunkName: "register-page" */),
 );
-const LoginPage = lazy(
+export const LoginPage = lazy(
   () => import('./pages/LoginPage' /* webpackChunkName: "login-page" */),
 );
-const AccountPage = lazy(
+export const AccountPage = lazy(
   () => import('./pages/AccountPage' /* webpackChunkName: "account-page" */),
 );
 
@@ -47,7 +47,7 @@ const App = () => {
     if (mode === 'light') {
       document.body.classList.remove('dark');
       document.body.classList.add('light');
-    } else if (mode === 'dark') {
+    } else {
       document.body.classList.remove('light');
       document.body.classList.add('dark');
     }

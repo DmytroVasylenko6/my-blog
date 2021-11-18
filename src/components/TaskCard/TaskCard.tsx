@@ -47,7 +47,10 @@ export default function TaskCard({
         className={classNames(
           [s.singleTaskContainer, 'theme-light-border'].join(' '),
         )}>
-        <button className={s.buttonClose} onClick={handleOpenModal}>
+        <button
+          data-testid="button-delete"
+          className={s.buttonClose}
+          onClick={handleOpenModal}>
           <img src={iconClose} alt="icon cross" />
         </button>
         <Link

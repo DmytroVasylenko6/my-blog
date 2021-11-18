@@ -30,7 +30,9 @@ export default function ThemeMode() {
   return (
     <div
       className={classNames([s.buttonContainer, 'theme-light-text'].join(' '))}>
-      <IconButton onClick={colorMode.toggleColorMode}>
+      <IconButton
+        data-testid="theme-button"
+        onClick={colorMode.toggleColorMode}>
         {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
       </IconButton>
     </div>

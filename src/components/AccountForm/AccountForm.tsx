@@ -13,9 +13,9 @@ import CustomError from '../common/CustomError';
 import { FormattedMessage } from 'react-intl';
 
 interface IValues {
-  name: string | null;
-  email: string | null;
-  age: number | null;
+  name: string;
+  email: string;
+  age: string | number;
 }
 
 const AccountForm = () => {
@@ -153,6 +153,7 @@ const AccountForm = () => {
             />
             <div className={s.buttonContainer}>
               <Button
+                data-testid="update"
                 type="submit"
                 fullWidth
                 // variant="dashed"
@@ -173,6 +174,7 @@ const AccountForm = () => {
                 )}
               </Button>
               <Button
+                data-testid="delete"
                 onClick={handleOpenModal}
                 fullWidth
                 // variant="dashed"

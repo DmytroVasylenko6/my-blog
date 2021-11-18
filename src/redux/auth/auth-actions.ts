@@ -70,7 +70,7 @@ const getCurrentUserSuccess = createAction(
 );
 const getCurrentUserError = createAction(
   'auth/getCurrentUserError',
-  withPayloadType<null>(),
+  withPayloadType<string>(),
 );
 
 const authActions = {

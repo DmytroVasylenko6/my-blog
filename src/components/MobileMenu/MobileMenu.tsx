@@ -7,32 +7,28 @@ import s from './MobileMenu.module.scss';
 import ThemeMode from '../ThemeMode';
 import classNames from 'classnames';
 import LanguageSelect from '../LanguageSelect';
+import { disableScroll, enableScroll } from '../../utils/disable&enableScroll';
 
 interface IProps {
   isOpen: boolean;
-  isWide: boolean;
   isAuthenticated: boolean;
   onClick(e: unknown): void;
 }
 
 export default function MobileMenu({
   isOpen,
-  isWide,
   onClick,
   isAuthenticated,
 }: IProps) {
   const nav = useRef(null);
-  const body = document.querySelector('body');
-
-  if (body) {
-    if (isOpen && isWide) {
-      body.classList.add('scroll-hidden');
-    } else {
-      body.classList.remove('scroll-hidden');
-    }
-  }
 
   useEffect(() => {
+    if (isOpen) {
+      disableScroll();
+    } else {
+      enableScroll();
+    }
+
     const navigationEl = document.getElementById('header_nav');
     if (navigationEl) {
       navigationEl.addEventListener('click', onClick);
@@ -52,6 +48,7 @@ export default function MobileMenu({
       classNames="burger-animation"
       unmountOnExit>
       <div
+        data-testid="header_nav"
         ref={nav}
         className={classNames([s.mobileNav, 'nav-menu'].join(' '))}
         id="header_nav">
@@ -61,7 +58,7 @@ export default function MobileMenu({
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          {isWide && (isAuthenticated ? <UserInfo /> : <AuthNavigation />)}
+          {isAuthenticated ? <UserInfo /> : <AuthNavigation />}
           <ThemeMode />
           <LanguageSelect />
         </div>

@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 import s from './RegisterPage.module.scss';
 import { FormattedMessage } from 'react-intl';
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div className={s.registerPage}>
       <Container>
@@ -20,4 +20,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

@@ -11,6 +11,7 @@ import TaskCard from '../../components/TaskCard';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import CustomLoader from '../../components/common/Loader';
 import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 
 const TodosPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -20,13 +21,12 @@ const TodosPage = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     setIsLoading(true);
-    dispatch(taskOperations.taskParse())
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsLoading(false);
-      });
+    dispatch(taskOperations.taskParse()).then(() => {
+      setIsLoading(false);
+    });
+    // .catch(() => {
+    //   setIsLoading(false);
+    // });
   }, [dispatch]);
 
   return (
@@ -53,38 +53,57 @@ const TodosPage = () => {
                 <FormAddTask />
               </Grid>
               <Grid item xs={12} md={9}>
-                <Grid
-                  container
-                  spacing={2}
-                  direction="row"
-                  justifyContent="flex-start"
-                  alignItems="flex-start">
-                  <TransitionGroup component={null} className={s.list}>
-                    {reverseTasksList.map(
-                      ({ _id, description, createdAt, completed }) => {
-                        const item = createRef<HTMLDivElement>();
-                        return (
-                          <CSSTransition
-                            key={_id}
-                            timeout={500}
-                            classNames="task-scale"
-                            appear={true}
-                            nodeRef={item}
-                            unmountOnExit>
-                            <Grid ref={item} item xs={12} sm={4} key={_id}>
-                              <TaskCard
-                                id={_id}
-                                description={description}
-                                createdAt={createdAt}
-                                completed={completed}
-                              />
-                            </Grid>
-                          </CSSTransition>
-                        );
-                      },
-                    )}
-                  </TransitionGroup>
-                </Grid>
+                {tasksList.length > 0 ? (
+                  <Grid
+                    container
+                    spacing={2}
+                    direction="row"
+                    justifyContent="flex-start"
+                    alignItems="flex-start">
+                    <TransitionGroup component={null} className={s.list}>
+                      {reverseTasksList.map(
+                        ({ _id, description, createdAt, completed }) => {
+                          const item = createRef<HTMLDivElement>();
+                          return (
+                            <CSSTransition
+                              key={_id}
+                              timeout={500}
+                              classNames="task-scale"
+                              appear={true}
+                              nodeRef={item}
+                              unmountOnExit>
+                              <Grid ref={item} item xs={12} sm={4} key={_id}>
+                                <TaskCard
+                                  id={_id}
+                                  description={description}
+                                  createdAt={createdAt}
+                                  completed={completed}
+                                />
+                              </Grid>
+                            </CSSTransition>
+                          );
+                        },
+                      )}
+                    </TransitionGroup>
+                  </Grid>
+                ) : (
+                  <Grid
+                    container
+                    spacing={2}
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center">
+                    <span
+                      className={classNames(
+                        [s.noTasksText, 'theme-light-text'].join(' '),
+                      )}>
+                      <FormattedMessage
+                        id="app.taskspage.notasks"
+                        defaultMessage="No tasks"
+                      />
+                    </span>
+                  </Grid>
+                )}
               </Grid>
             </>
           )}

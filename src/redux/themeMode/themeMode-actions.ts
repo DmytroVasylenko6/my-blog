@@ -6,8 +6,8 @@ const themeModeAction = createAction(
   withPayloadType<ITheme>(),
 );
 
-export default themeModeAction;
-
 function withPayloadType<T>() {
   return (t: T) => ({ payload: t });
 }
+
+export default themeModeAction;

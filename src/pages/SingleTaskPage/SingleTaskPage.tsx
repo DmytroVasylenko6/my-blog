@@ -76,31 +76,31 @@ function SingleTaskPage() {
 
   const onClickUpdateTask = async () => {
     setIsUpdate('update');
-    if (todo) {
-      try {
-        const response = await todosAPI.updateTaskById(todosId, {
-          completed: !todo.completed,
-        });
-        setTodo(response.data.data);
-        dispatch(
-          notifInfo({
-            message: 'Task successfully updated!',
-            status: true,
-            severity: 'success',
-          }),
-        );
-        setIsUpdate('');
-      } catch (error: any) {
-        dispatch(
-          notifInfo({
-            message: error.message,
-            status: true,
-            severity: 'error',
-          }),
-        );
-        setIsUpdate('');
-      }
+    // if (todo) {
+    try {
+      const response = await todosAPI.updateTaskById(todosId, {
+        completed: !todo.completed,
+      });
+      setTodo(response.data.data);
+      dispatch(
+        notifInfo({
+          message: 'Task successfully updated!',
+          status: true,
+          severity: 'success',
+        }),
+      );
+      setIsUpdate('');
+    } catch (error: any) {
+      dispatch(
+        notifInfo({
+          message: error.message,
+          status: true,
+          severity: 'error',
+        }),
+      );
+      setIsUpdate('');
     }
+    // }
   };
 
   const onClickDeleteTask = async () => {
@@ -120,7 +120,10 @@ function SingleTaskPage() {
   return (
     <div className={s.singleTaskPage}>
       <Container>
-        <button className={s.backButton} onClick={handleGoBack}>
+        <button
+          data-testid="back-button"
+          className={s.backButton}
+          onClick={handleGoBack}>
           <FormattedMessage
             id="app.singletaskpage.back"
             defaultMessage="Go back"
@@ -191,6 +194,7 @@ function SingleTaskPage() {
               </div>
               <div className={s.buttonContainer}>
                 <button
+                  data-testid="update"
                   onClick={onClickUpdateTask}
                   className={classNames(
                     [s.updateBtn, 'theme-light-button'].join(' '),
@@ -214,7 +218,10 @@ function SingleTaskPage() {
                     />
                   )}
                 </button>
-                <button onClick={handleOpenModal} className={s.deleteBtn}>
+                <button
+                  data-testid="delete"
+                  onClick={handleOpenModal}
+                  className={s.deleteBtn}>
                   {isDelete === 'delete' ? (
                     <Loader
                       type="ThreeDots"

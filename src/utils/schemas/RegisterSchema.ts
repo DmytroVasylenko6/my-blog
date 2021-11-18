@@ -14,9 +14,7 @@ const registerSchema = Yup.object().shape({
   age: Yup.number()
     .min(5, 'app.yup.validate.age.min')
     .max(120, 'app.yup.validate.age.max')
-    .required('app.yup.validate.required')
-    .positive()
-    .integer(),
+    .required('app.yup.validate.required'),
 });
 
 export default registerSchema;

@@ -4,12 +4,12 @@ import authActions from './auth-actions';
 import { IDataUser, IUser, TAvatar, TToken, TIsAuth } from './auth-types';
 
 const initialUserState: IUser = {
-  age: null,
-  _id: null,
-  name: null,
-  email: null,
-  createdAt: null,
-  updatedAt: null,
+  age: '',
+  _id: '',
+  name: '',
+  email: '',
+  createdAt: '',
+  updatedAt: '',
 };
 
 const InitialTokenState = null as TToken;
@@ -18,7 +18,7 @@ const InitialAvatarState = null as TAvatar;
 
 const InitialIsAuthState = false as TIsAuth;
 
-const user = createReducer(initialUserState, builder => {
+export const user = createReducer(initialUserState, builder => {
   builder
     .addCase(
       authActions.registerSuccess,
@@ -39,7 +39,7 @@ const user = createReducer(initialUserState, builder => {
     );
 });
 
-const token = createReducer(InitialTokenState, builder => {
+export const token = createReducer(InitialTokenState, builder => {
   builder
     .addCase(
       authActions.registerSuccess,
@@ -53,7 +53,7 @@ const token = createReducer(InitialTokenState, builder => {
     .addCase(authActions.deleteUserSuccess, () => null);
 });
 
-const isAuthenticated = createReducer(InitialIsAuthState, {
+export const isAuthenticated = createReducer(InitialIsAuthState, {
   [authActions.registerSuccess.toString()]: (): TIsAuth => true,
   [authActions.loginSuccess.toString()]: (): TIsAuth => true,
   [authActions.getCurrentUserSuccess.toString()]: (): TIsAuth => true,
@@ -64,7 +64,7 @@ const isAuthenticated = createReducer(InitialIsAuthState, {
   [authActions.deleteUserSuccess.toString()]: (): TIsAuth => false,
 });
 
-const avatar = createReducer(InitialAvatarState, {
+export const avatar = createReducer(InitialAvatarState, {
   [authActions.getAvatarSuccess.toString()]: (_, { payload }) => payload,
   [authActions.uploadAvatarSuccess.toString()]: (_, { payload }) => payload,
   [authActions.logoutSuccess.toString()]: () => null,

@@ -1,10 +1,10 @@
 export interface IUser {
-  age: number | null;
-  _id: string | number | null;
-  name: string | null;
-  email: string | null;
-  createdAt: string | null;
-  updatedAt: string | null;
+  age: string | number;
+  _id: string | number;
+  name: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
 }
 export type TAvatar = string | null;
 

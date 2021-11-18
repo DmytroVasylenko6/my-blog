@@ -83,7 +83,10 @@ export default function ModalUnstyledDemo({
               {title}
             </h2>
             <div className={s.buttonContainer}>
-              <button className={s.buttonYes} onClick={onDelete}>
+              <button
+                data-testid="button-yes"
+                className={s.buttonYes}
+                onClick={onDelete}>
                 <FormattedMessage
                   id="app.modal.button.yes"
                   defaultMessage="Yes"

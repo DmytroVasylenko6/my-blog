@@ -5,8 +5,6 @@ import { AppDispatch } from '../store';
 import { INewTask } from './task-types';
 
 const taskParse = () => async (dispatch: AppDispatch) => {
-  dispatch(taskActions.parseTaskRequest());
-
   try {
     const tasks = await todosAPI.getAllTasks();
     dispatch(taskActions.parseTaskSuccess(tasks.data));
@@ -21,6 +19,7 @@ const taskAdd = (newTask: INewTask) => async (dispatch: AppDispatch) => {
   try {
     const response = await todosAPI.addNewTask(newTask);
     dispatch(taskActions.addTaskSuccess(response.data));
+
     dispatch(
       notifInfo({
         message: 'Task successfully added!',
@@ -42,7 +41,6 @@ const taskAdd = (newTask: INewTask) => async (dispatch: AppDispatch) => {
 
 const taskDelete = (id: string | number) => async (dispatch: AppDispatch) => {
   dispatch(taskActions.deleteTaskRequest());
-
   try {
     const response = await todosAPI.deleteTask(id);
     dispatch(taskActions.deleteTaskSuccess(id));

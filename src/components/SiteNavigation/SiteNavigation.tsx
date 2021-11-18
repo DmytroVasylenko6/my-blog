@@ -10,6 +10,7 @@ export default function SiteNavigation() {
       <ul className={s.navList}>
         <li className={s.navItem}>
           <NavLink
+            data-testid="nav-home"
             exact
             to={routes.home}
             activeClassName={classNames(

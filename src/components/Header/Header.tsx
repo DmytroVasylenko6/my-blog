@@ -90,6 +90,7 @@ export default function Header() {
           {isWide && (
             <Grid item>
               <div
+                data-testid="burger-button"
                 onClick={() => toggling()}
                 className={classNames(lines.join(' '))}
                 role="button"
@@ -108,7 +109,6 @@ export default function Header() {
       {isWide && (
         <MobileMenu
           isOpen={isOpen}
-          isWide={isWide}
           isAuthenticated={isAuthenticated}
           onClick={handleClickNavItem}
         />

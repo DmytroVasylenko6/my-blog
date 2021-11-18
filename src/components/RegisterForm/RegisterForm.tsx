@@ -57,6 +57,7 @@ const RegisterForm = () => {
                 defaultMessage="Name"
               />
             }
+            data-testid="name"
             name="name"
             type="text"
             autoFocus
@@ -88,6 +89,7 @@ const RegisterForm = () => {
                 defaultMessage="Email"
               />
             }
+            data-testid="email"
             type="email"
             id="email"
             error={errors.email && touched.email ? true : false}
@@ -117,6 +119,7 @@ const RegisterForm = () => {
                 defaultMessage="Password"
               />
             }
+            data-testid="password"
             type="password"
             id="password"
             error={errors.password && touched.password ? true : false}
@@ -146,6 +149,7 @@ const RegisterForm = () => {
                 defaultMessage="Age"
               />
             }
+            data-testid="age"
             type="number"
             id="age"
             error={errors.age && touched.age ? true : false}

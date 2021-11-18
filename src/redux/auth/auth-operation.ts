@@ -1,6 +1,7 @@
 import authActions from './auth-actions';
 import notifInfo from '../notification/notif-actions';
 import { AppDispatch, RootState } from '../store';
+
 const axios = require('axios');
 
 axios.defaults.baseURL = 'https://api-nodejs-todolist.herokuapp.com';
@@ -10,7 +11,7 @@ interface IToken {
   unset(): void;
 }
 
-console.log(axios.defaults);
+// console.log(axios.defaults);
 
 const token: IToken = {
   set(token) {
@@ -203,11 +204,11 @@ const uploadAvatar =
       const response = await axios.get(`/user/${userId}/avatar`, {
         responseType: 'arraybuffer',
       });
+
       let blob = new Blob([response.data], {
         type: response.headers['content-type'],
       });
       let avatar = URL.createObjectURL(blob);
-
       dispatch(authActions.uploadAvatarSuccess(avatar));
       dispatch(
         notifInfo({
@@ -235,6 +236,7 @@ const getAvatar =
       const response = await axios.get(`/user/${userId}/avatar`, {
         responseType: 'arraybuffer',
       });
+
       let blob = new Blob([response.data], {
         type: response.headers['content-type'],
       });

@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import s from './FormAddTask.module.scss';
-import { Formik, Form, ErrorMessage } from 'formik';
-import CustomError from '../common/CustomError';
+import { Formik, Form } from 'formik';
 import { TextField, Button, Typography } from '@mui/material';
 import taskOperations from '../../redux/tasks/tasks-operations';
 import { useAppDispatch } from '../../hooks/redux-hooks';
@@ -58,14 +57,10 @@ export default function FormAddTask() {
               autoFocus
               multiline
               rows={4}
-              error={errors.description && touched.description ? true : false}
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <ErrorMessage
-              render={message => <CustomError>{message}</CustomError>}
-              name="description"
-            />
+
             <Button
               type="submit"
               fullWidth

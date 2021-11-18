@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 const AuthNavigation = () => {
   return (
-    <div className={s.authNavContainer}>
+    <div data-testid="auth-nav" className={s.authNavContainer}>
       <NavLink
         to={routes.login}
         className={classNames(

@@ -24,12 +24,12 @@ export default function UploadButton() {
   const dispatch = useAppDispatch();
 
   const onChangeInput = async (e: Event<HTMLInputElement>) => {
-    if (user._id) {
-      let files: any = e.target.files;
-      setIsUpload(true);
-      await dispatch(authOperations.uploadAvatar(files[0], user._id));
-      setIsUpload(false);
-    }
+    // if (user._id) {
+    let files: any = e.target.files;
+    setIsUpload(true);
+    await dispatch(authOperations.uploadAvatar(files[0], user._id));
+    setIsUpload(false);
+    // }
   };
 
   return (
@@ -42,6 +42,7 @@ export default function UploadButton() {
           multiple
           type={isUpload ? 'hidden' : 'file'}
           onChange={onChangeInput}
+          data-testid="input-element"
         />
         {isUpload ? (
           <Loader type="ThreeDots" color="#fc842d" height={80} width={80} />

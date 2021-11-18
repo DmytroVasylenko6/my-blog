@@ -36,6 +36,7 @@ export default function UserInfo() {
         </span>
       </Link>
       <button
+        data-testid="logout"
         onClick={() => onLogout()}
         className={classNames(
           [s.logOutButton, 'theme-light-text', 'theme-light-hover'].join(' '),
