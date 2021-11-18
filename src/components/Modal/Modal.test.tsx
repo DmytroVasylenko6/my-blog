@@ -2,7 +2,6 @@ import Modal from './Modal';
 import ThemeMode from '../ThemeMode';
 import { screen, fireEvent } from '@testing-library/react';
 import customRender from '../../utils/test-utils';
-import { testLogin, testLogout } from '../../utils/test-utils';
 import { act } from 'react-dom/test-utils';
 
 it('the modal window should change color when you click on the theme switcher button', async () => {
