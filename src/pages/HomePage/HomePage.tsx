@@ -22,7 +22,7 @@ const HomePage = () => {
           <Link className={s.link} to={routes.todos}>
             <FormattedMessage
               id="app.homepage.link"
-              defaultMessage="Click here"
+              defaultMessage="Click heree"
             />
           </Link>
         </Typography>
